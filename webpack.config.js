@@ -38,6 +38,20 @@ module.exports = {
           // },
         ],
       },
+      {
+        test: /\.pug/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+          {
+            loader: 'pug-html-loader',
+            options: {
+              pretty: true,
+            }
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -45,10 +59,18 @@ module.exports = {
       filename: "./css/main.css",
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/index.pug',
+      filename: "index.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/access.pug',
+      filename: "access.html",
     }),
     new CleanWebpackPlugin(),
   ],
+  stats: {
+      children: true,
+    },
 }
 
 // npx webpack --mode development
